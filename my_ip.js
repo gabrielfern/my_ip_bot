@@ -19,8 +19,9 @@ const https = require('https'),
 // })
 
 httpbin.on('ip', ip => {
-    let body = {
-            chat_id: 313287164,
+    let some_chat,
+        body = {
+            chat_id: `${some_chat}`,
             text: ip
         },
         stringifyed = JSON.stringify(body),
