@@ -9,19 +9,18 @@ const https = require('https'),
 //        console.log(JSON.parse(data.toString()))
 //    })
 // })
-//
+
 // https.get(url + 'getUpdates', resp => {
 //    resp.on('data', data => {
-//        let results = JSON.parse(data.toString()).result
-//        console.log('Length: ' + results.length)
-//        console.log(results[9])
+//        let result = JSON.parse(data.toString())
+//
+//        console.log(result['result'][12])
 //    })
 // })
 
 httpbin.on('ip', ip => {
-    let some_chat,
-        body = {
-            chat_id: `${some_chat}`,
+    let body = {
+            chat_id: info.chat_id,
             text: ip
         },
         stringifyed = JSON.stringify(body),
@@ -40,5 +39,4 @@ httpbin.on('ip', ip => {
         })
     req.end(stringifyed)
 })
-
 httpbin.getIp()
