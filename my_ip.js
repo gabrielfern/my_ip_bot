@@ -1,7 +1,7 @@
 const https = require('https'),
       http = require('http'),
       fs = require('fs'),
-      httpbin = new (require('./httpbin'))(),
+      HttpBin = require('./httpbin'),
       info = JSON.parse(fs.readFileSync('personal_info.json').toString()),
       url = `https://api.telegram.org/bot${info.token}/`
 
@@ -33,12 +33,17 @@ function getUpdates() {
                     console.log('username:', update.message.chat.username)
                     console.log('chat:', update.message.chat.id)
                     console.log('text:', update.message.text)
-                    if (update.message.text == '/ip')
-                        if (update.message.chat.username == 'gabrielfernndss')
+                    if (update.message.text == '/ip') {
+                        if (update.message.chat.username == 'gabrielfernndss') {
                             sendIp(update.message.chat.id)
-                        else
+                        } else {
                             sendMessage(update.message.chat.id,
-                                'Sorry, u\'re not Gabriel')
+                                'sorry, u\'re not gabriel fernandes')
+                        }
+                    } else {
+                        sendMessage(update.message.chat.id,
+                            'sorry, not a ip request')
+                    }
                 }
                 flushJSON('personal_info.json', info)
             }
@@ -68,8 +73,7 @@ function sendMessage(chatId, text) {
         req = https.request(options)
     req.on('response', resp => {
         resp.on('data', data => {
-            console.log(JSON.parse(data.toString()).ok)
-            console.log(Date.now())
+            console.log('resp:', JSON.parse(data.toString()).ok)
         })
     })
     req.on('error', err => console.log(err))
@@ -77,10 +81,11 @@ function sendMessage(chatId, text) {
 }
 
 function sendIp(chatId) {
-    httpbin.on('ip', ip => {
+    let hb = new HttpBin()
+    hb.on('ip', ip => {
         sendMessage(chatId, ip)
     })
-    httpbin.getIp()
+    hb.getIp()
 }
 
 function flushJSON(file, obj) {
