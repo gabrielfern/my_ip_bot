@@ -2,8 +2,7 @@ const https = require('https'),
       http = require('http'),
       fs = require('fs'),
       HttpBin = require('./httpbin'),
-      info = JSON.parse(fs.readFileSync('personal_info.json').toString()),
-      url = `https://api.telegram.org/bot${info.token}/`
+      info = JSON.parse(fs.readFileSync('personal_info.json').toString())
 
 function getUpdates() {
     let body = {
@@ -38,7 +37,7 @@ function getUpdates() {
                             sendIp(update.message.chat.id)
                         } else {
                             sendMessage(update.message.chat.id,
-                                'sorry, u\'re not gabriel fernandes')
+                                'sorry, u\'re not @gabrielfernndss')
                         }
                     } else {
                         sendMessage(update.message.chat.id,
