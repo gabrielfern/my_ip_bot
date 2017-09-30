@@ -43,7 +43,7 @@ function getUpdates() {
                 }
                 flushJSON('personal_info.json', info)
             }
-            getUpdates()
+            setImmediate(getUpdates)
         })
     })
     req.on('error', err => console.log(err))
