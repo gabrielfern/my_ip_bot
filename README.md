@@ -4,6 +4,6 @@ through a simple telegram chat
 
 # apis used here
 
-[telegram bots api](https://core.telegram.org/bots/api)
+[telegram bot api](https://core.telegram.org/bots/api)
 
 [httpbin api](http://httpbin.org/)
