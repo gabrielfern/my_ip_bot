@@ -1,5 +1,4 @@
 const https = require('https'),
-      http = require('http'),
       fs = require('fs'),
       HttpBin = require('./httpbin'),
       info = JSON.parse(fs.readFileSync('personal_info.json').toString())
