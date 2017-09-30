@@ -2,8 +2,8 @@ Using the telegram bot api for retrieve your ip address,
 everytime it had changed, being able to know your external ip address
 through a simple telegram chat
 
-# apis involved
+# apis used here
 
-    https://core.telegram.org/bots/api
+    ![telegram bots api](https://core.telegram.org/bots/api)
 
-    http://httpbin.org/
+    ![httpbin api](http://httpbin.org/)
