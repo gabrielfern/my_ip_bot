@@ -18,7 +18,8 @@ class HttpBin extends Event {
 module.exports = HttpBin
 
 if (require.main == module) {
-    hb = new HttpBin()
+    // example of how to use it
+    let hb = new HttpBin()
     hb.on('ip', ip => console.log(ip))
     hb.getIp()
 }
