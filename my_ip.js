@@ -31,12 +31,12 @@ function getUpdates() {
                     console.log('username:', update.message.chat.username)
                     console.log('chat:', update.message.chat.id)
                     console.log('text:', update.message.text)
-                    if (update.message.text == '/ip')
-                        if (update.message.chat.username == 'gabrielfernndss')
+                    if (update.message.text == info.command)
+                        if (update.message.chat.username == info.me)
                             sendIp(update.message.chat.id)
                         else
                             sendMessage(update.message.chat.id,
-                                'sorry, u\'re not @gabrielfernndss')
+                                `sorry, u're not @${info.me}`)
                     else
                         sendMessage(update.message.chat.id,
                             'sorry, not a ip request')
