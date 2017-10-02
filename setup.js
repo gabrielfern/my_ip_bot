@@ -16,9 +16,10 @@ token => {
                 'me': username,
                 'command': message
             }
-            rl.write('personal info saved to personal_info.json\n')
+            fs.writeFileSync('personal_info.json', JSON.stringify(info))
             rl.write(JSON.stringify(info) + '\n')
-            rl.write('you can now run start to init the bot\n')
+            rl.write('data saved to personal_info.json\n')
+            rl.write('you can now run "node start"\n')
             rl.close()
         })
     })

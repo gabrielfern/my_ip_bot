@@ -10,4 +10,4 @@ had changed, being able to know your external ip address through a simple
 
 # to get your external ip address
 
-    node httpbin.js
+    node httpbin
