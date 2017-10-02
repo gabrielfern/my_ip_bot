@@ -1,7 +1,6 @@
 const https = require('https'),
       fs = require('fs'),
-      HttpBin = require('./httpbin'),
-      info = JSON.parse(fs.readFileSync('personal_info.json').toString())
+      HttpBin = require('./httpbin')
 
 function getUpdates() {
     let body = {
@@ -11,7 +10,7 @@ function getUpdates() {
         fresh = info.update_id == undefined || info.offset == undefined
     if (!fresh)
         body.offset = info.update_id + info.offset
-    let stringifyed = JSON.stringify(body),
+    let stringified = JSON.stringify(body),
         options = {
             'hostname': 'api.telegram.org',
             'port': 443,
@@ -19,7 +18,7 @@ function getUpdates() {
             'method': 'POST',
             'headers': {
                 'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(stringifyed)
+                'Content-Length': Buffer.byteLength(stringified)
             }
         },
         req = https.request(options)
@@ -29,7 +28,7 @@ function getUpdates() {
             if (data.ok) {
                 if (data.result.length > 0) {
                     if (fresh) {
-                        info.update_id = data.result[0]
+                        info.update_id = data.result[0].update_id
                         info.offset = 0
                     }
                     // set received messages as "read"
@@ -63,7 +62,7 @@ function getUpdates() {
         })
     })
     req.on('error', err => console.log(err))
-    req.end(stringifyed)
+    req.end(stringified)
 }
 
 function sendMessage(chatId, text) {
@@ -71,7 +70,7 @@ function sendMessage(chatId, text) {
             'chat_id': chatId,
             'text': text
         },
-        stringifyed = JSON.stringify(body),
+        stringified = JSON.stringify(body),
         options = {
             'hostname': 'api.telegram.org',
             'port': 443,
@@ -79,7 +78,7 @@ function sendMessage(chatId, text) {
             'method': 'POST',
             'headers': {
                 'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(stringifyed)
+                'Content-Length': Buffer.byteLength(stringified)
             }
         },
         req = https.request(options)
@@ -90,7 +89,7 @@ function sendMessage(chatId, text) {
         })
     })
     req.on('error', err => console.log(err))
-    req.end(stringifyed)
+    req.end(stringified)
 }
 
 function sendIp(chatId) {
@@ -105,4 +104,9 @@ function flushJSON(file, obj) {
     fs.writeFileSync(file, JSON.stringify(obj))
 }
 
-getUpdates()
+if (fs.existsSync('personal_info.json')) {
+    info = JSON.parse(fs.readFileSync('personal_info.json').toString())
+    getUpdates()
+} else {
+    console.log('You need to setup your bot, run "node setup"')
+}

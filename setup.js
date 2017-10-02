@@ -15,9 +15,10 @@ token => {
                 'token': token,
                 'me': username,
                 'command': message
-            }
-            fs.writeFileSync('personal_info.json', JSON.stringify(info))
-            rl.write(JSON.stringify(info) + '\n')
+            },
+            stringified = JSON.stringify(info)
+            fs.writeFileSync('personal_info.json', stringified)
+            rl.write(stringified + '\n')
             rl.write('data saved to personal_info.json\n')
             rl.write('you can now run "node start"\n')
             rl.close()
