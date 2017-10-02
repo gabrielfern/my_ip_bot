@@ -7,3 +7,7 @@ through a simple telegram chat
 [telegram bot api](https://core.telegram.org/bots/api)
 
 [httpbin api](http://httpbin.org/)
+
+# to get your external ip address
+
+    node httpbin.js
