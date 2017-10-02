@@ -1,8 +1,7 @@
 {
   "name": "my_ip_bot",
   "version": "1.0.0",
-  "description": "a telegram bot for retrieve my [dynamic] ip adress",
-  "main": "my_ip.js",
+  "description": "a telegram bot for retrieve my [dynamic] ip address",
   "keywords": [
     "bot",
     "telegram"
