@@ -11,3 +11,20 @@ had changed, being able to know your external ip address through a simple
 # to get your external ip address
 
     node httpbin
+
+# how to use
+
+# 1.setup
+
+    you need a telegram bot api token (which can be get with /newbot command
+        to @BotFather)
+    after that, just run
+
+        node setup
+
+# 2.start
+
+    and every time you need your bot to be running (to reply messages)
+    run
+
+        node start
