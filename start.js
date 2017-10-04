@@ -1,8 +1,18 @@
 const https = require('https'),
       fs = require('fs'),
-      HttpBin = require('./httpbin')
+      HttpBin = require('./httpbin'),
+      limitRequests = true,
+      maxRequests = 1000
 
 function getUpdates() {
+    if (limitRequests) {
+        if (requestsCount > maxRequests) {
+            console.log('=====')
+            console.log('# maximum requests reached')
+            process.exit(15)
+        }
+        requestsCount++
+    }
     let body = {
             'timeout': 120
         },
@@ -106,6 +116,8 @@ function flushJSON(file, obj) {
 
 if (fs.existsSync('personal_info.json')) {
     info = JSON.parse(fs.readFileSync('personal_info.json').toString())
+    if (limitRequests)
+        requestsCount = 0
     getUpdates()
 } else {
     console.log('You need to setup your bot, run "node setup"')
