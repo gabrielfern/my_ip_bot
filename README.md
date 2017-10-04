@@ -1,6 +1,6 @@
 Using the telegram bot api for retrieve your ip address, every time it
-had changed, being able to know your external ip address through a simple
- telegram chat (useful for deal with dynamic ip links)
+has changed, being able to know your external ip address through a simple
+telegram chat (useful when you are out of pc/home if you have a dynamic ip)
 
 # apis used here
 
