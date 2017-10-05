@@ -1,8 +1,12 @@
 const https = require('https'),
       fs = require('fs'),
       HttpBin = require('./httpbin'),
+      // set to false if you want the bot to run forever
+      // maintaining this true and a reasonable maximum value
+      // can be util to prevent the computer to be overwhelmed
+      // from malicious sources
       limitRequests = true,
-      maxRequests = 1000
+      maxRequests = 10000
 
 function getUpdates() {
     if (limitRequests) {
