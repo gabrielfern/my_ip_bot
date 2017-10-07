@@ -4,7 +4,7 @@ const https = require('https'),
       // limiting the responses can be useful to prevent the computer
       // to be overwhelmed if reach the amount of maximum responses
       limitResponse = true,
-      maxResponses = 3
+      maxResponses = 10000
 
 function getUpdates() {
     let body = {
