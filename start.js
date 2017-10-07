@@ -1,21 +1,22 @@
 const https = require('https'),
       fs = require('fs'),
       HttpBin = require('./httpbin'),
-      // set to false if you want the bot to run forever
+      // set to false if you want the bot to run forever,
       // maintaining this true and a reasonable maximum value
-      // can be util to prevent the computer to be overwhelmed
-      // from malicious sources
+      // can be useful to prevent the computer to be overwhelmed
+      // if requests reach the amount
       limitRequests = true,
-      maxRequests = 10000
+      maxRequests = 1
 
 function getUpdates() {
     if (limitRequests) {
+        requestsCount++
+        console.log('...', requestsCount)
         if (requestsCount > maxRequests) {
             console.log('=====')
             console.log('# maximum requests reached')
             process.exit(15)
         }
-        requestsCount++
     }
     let body = {
             'timeout': 120
