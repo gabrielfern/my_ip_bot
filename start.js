@@ -1,23 +1,12 @@
 const https = require('https'),
       fs = require('fs'),
       HttpBin = require('./httpbin'),
-      // set to false if you want the bot to run forever,
-      // maintaining this true and a reasonable maximum value
-      // can be useful to prevent the computer to be overwhelmed
-      // if requests reach the amount
-      limitRequests = true,
-      maxRequests = 1
+      // limiting the responses can be useful to prevent the computer
+      // to be overwhelmed if reach the amount of maximum responses
+      limitResponse = true,
+      maxResponses = 3
 
 function getUpdates() {
-    if (limitRequests) {
-        requestsCount++
-        console.log('...', requestsCount)
-        if (requestsCount > maxRequests) {
-            console.log('=====')
-            console.log('# maximum requests reached')
-            process.exit(15)
-        }
-    }
     let body = {
             'timeout': 120
         },
@@ -101,6 +90,14 @@ function sendMessage(chatId, text) {
         resp.on('data', data => {
             // log to console if message was successful
             console.log('resp:', JSON.parse(data.toString()).ok)
+            if (limitResponse) {
+                responseCount++
+                if (responseCount >= maxResponses) {
+                    console.log('=====')
+                    console.log('# maximum responses reached')
+                    process.exit(15)
+                }
+            }
         })
     })
     req.on('error', err => console.log(err))
@@ -121,8 +118,8 @@ function flushJSON(file, obj) {
 
 if (fs.existsSync('personal_info.json')) {
     info = JSON.parse(fs.readFileSync('personal_info.json').toString())
-    if (limitRequests)
-        requestsCount = 0
+    if (limitResponse)
+        responseCount = 0
     getUpdates()
 } else {
     console.log('You need to setup your bot, run "node setup"')
